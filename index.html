@@ -111,21 +111,19 @@
 
 
 
-  .pub{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.4rem,3vw,2.4rem);}
-  @media(max-width:800px){.pub{grid-template-columns:1fr;}}
-  .pub-card{border:1px solid var(--line);background:var(--paper);overflow:hidden;display:flex;flex-direction:column;transition:background .5s;}
-  .pub-card img{aspect-ratio:1/1;object-fit:cover;width:100%;}
-  /* Side by side, the events column is as tall as the Luma embed. Let the cover
-     grow into that height instead of leaving a gap under the podcast text. */
-  @media(min-width:801px){.pub-card img{aspect-ratio:auto;flex:1;min-height:0;}}
   .pub-link{margin:.7rem 0 0;font-family:var(--mono);font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;}
   .pub-link a{color:var(--muted);text-decoration:none;border-bottom:1px solid var(--line);padding-bottom:2px;transition:color .2s,border-color .2s;}
   .pub-link a:hover{color:var(--ink);border-color:var(--ink);}
-  .pub-card .body,.pub-events{padding:clamp(1.4rem,3vw,2rem);display:flex;flex-direction:column;gap:.7rem;flex:1;}
-  .pub-events{border:1px solid var(--line);background:var(--paper);transition:background .5s;}
-  .pub-card .k,.pub-events .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
-  .pub-card h3,.pub-events h3{font-size:clamp(1.5rem,1vw + 1.2rem,2rem);}
-  .pub-card .tail,.pub-events .tail{margin-top:auto;}
+
+
+  /* Events / podcast: stacked full-width sections, copy beside media */
+  .split{display:grid;grid-template-columns:1fr 1.05fr;gap:clamp(1.8rem,5vw,4rem);align-items:start;}
+  @media(max-width:860px){.split{grid-template-columns:1fr;}}
+  .split-copy{display:flex;flex-direction:column;align-items:flex-start;gap:1rem;}
+  .split-media{min-width:0;}
+  .split-media .cover{width:100%;border:1px solid var(--line);}
+  /* Media first on wide screens for the podcast, so the two sections alternate. */
+  @media(min-width:861px){.split.flip .split-copy{order:2;}.split.flip .split-media{order:1;}}
 
   /* Luma embed — carries its own date, venue and price */
   .luma{margin-top:.3rem;border:1px solid var(--line);width:100%;height:740px;display:block;background:var(--paper);}
@@ -225,8 +223,8 @@
     <a class="brand" id="brand" href="#top"><img src="assets/sigil.png" alt="Wisdom Workers"><span data-clown="Wisdom Workers ✨">Wisdom Workers</span></a>
     <nav class="navlinks">
       <a href="#thesis" data-clown="what we're cooking 🍳">What we're building</a>
-      <a href="#listen" data-clown="noises &amp; hangs">Podcast &amp; events</a>
-      <a href="#listen" class="cta" data-clown="COME HANG 🤡">Wisdom Wednesday</a>
+      <a href="#listen" data-clown="noises 🎧">Podcast</a>
+      <a href="#events" class="cta" data-clown="COME HANG 🤡">Wisdom Wednesday</a>
     </nav>
   </div>
 </header>
@@ -240,7 +238,7 @@
       <h1 class="display-xl reveal" data-clown="ur job is COOKED 💀 wanna get wise haha">Knowledge work is ending. Wisdom work is next.</h1>
       <p class="lede muted reveal" style="margin:1.4rem 0;max-width:34ch" data-clown="we're literally so wise it's crazy. come vibe, bring snacks 🫧">The world is drowning in intelligence and starving for wisdom.</p>
       <div class="actions reveal">
-        <a class="btn btn-fill" href="#listen" data-clown="COME HANG LOSER 🤡">Come to Wisdom Wednesday</a>
+        <a class="btn btn-fill" href="#events" data-clown="COME HANG LOSER 🤡">Come to Wisdom Wednesday</a>
         <a class="btn btn-line" href="https://wisdomworkers.substack.com/" data-clown="stalk us 💌">Follow along</a>
       </div>
     </div>
@@ -285,47 +283,49 @@
     </div>
   </section>
 
-  <!-- PUBLISHING -->
-  <section class="band" id="listen">
+  <!-- EVENTS -->
+  <section class="band" id="events">
     <div class="wrap">
       <div class="sec-head reveal">
-        <span class="eyebrow" data-clown="noises &amp; hangs 🎧">Listen &amp; show up</span>
-        <div style="margin-top:.8rem"><span class="ph" data-clown="we talk. sometimes deep, sometimes not 🤷">[ section headline — TBD ]</span></div>
+        <span class="eyebrow" data-clown="the hangs 🎪">Events</span>
+        <h2 class="display-l" style="margin-top:.8rem" data-clown="Wisdom Wednesday 🫧">Wisdom Wednesday</h2>
       </div>
-      <div class="pub reveal">
-        <article class="pub-card">
-          <img src="assets/simon-podcast.png" alt="Wisdom Workers podcast">
-          <div class="body">
-            <span class="k" data-clown="the pod 🎙️">Podcast</span>
-            <h3 data-clown="Wisdom Workers 🎉">Wisdom Workers</h3>
-            <span class="ph" data-clown="wise ppl yapping about how they got wise 🎙️">[ one-line show description — TBD ]</span>
-            <div class="tail">
-              <span class="ph" data-clown="ep 1 loading... 🔜">Episode 01 — coming</span>
-              <p class="pub-link"><a href="https://wisdomworkers.substack.com/podcast" data-clown="find us on substack 💌">Follow on Substack →</a></p>
-            </div>
-          </div>
-        </article>
-        <div class="pub-events">
-          <span class="k" data-clown="the hangs 🎪">Events</span>
-          <h3 data-clown="Wisdom Wednesday 🫧">Wisdom Wednesday</h3>
-          <span class="ph" data-clown="we hang out and get wise together 🫧">[ one-line events description — TBD ]</span>
-          <div class="tail">
-            <!-- Luma is the source of truth for date, venue and price. Never restate them here. -->
-            <iframe class="luma" src="https://luma.com/embed/event/hdtczrxp/simple"
-                    title="RSVP for Wisdom Wednesday #1" loading="lazy"
-                    frameborder="0" allow="fullscreen; payment"></iframe>
-            <p class="luma-fallback">Widget not loading? <a href="https://luma.com/hdtczrxp">Get a ticket on Luma</a>.</p>
-            <span class="ph" data-clown="round 2 loading 🔜">[ second date — add Luma link when live ]</span>
-          </div>
+      <div class="split reveal">
+        <div class="split-copy">
+          <span class="ph" data-clown="we hang out and get wise together 🫧">[ what happens in the room — TBD ]</span>
+          <p class="pub-link"><a href="https://luma.com/hdtczrxp" data-clown="get in 🎟️">All dates on Luma &#8594;</a></p>
+          <span class="ph" data-clown="round 2 loading 🔜">[ second date — add Luma link when live ]</span>
+        </div>
+        <div class="split-media">
+          <!-- Luma is the source of truth for date, venue and price. Never restate them here. -->
+          <iframe class="luma" src="https://luma.com/embed/event/hdtczrxp/simple"
+                  title="RSVP for Wisdom Wednesday #1" loading="lazy"
+                  frameborder="0" allow="fullscreen; payment"></iframe>
+          <p class="luma-fallback">Widget not loading? <a href="https://luma.com/hdtczrxp">Get a ticket on Luma</a>.</p>
         </div>
       </div>
     </div>
   </section>
 
-
-
-
-
+  <!-- PODCAST -->
+  <section class="band band-alt" id="listen">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-clown="the pod 🎙️">Podcast</span>
+        <h2 class="display-l" style="margin-top:.8rem" data-clown="Wisdom Workers 🎉">Wisdom Workers</h2>
+      </div>
+      <div class="split flip reveal">
+        <div class="split-copy">
+          <span class="ph" data-clown="wise ppl yapping about how they got wise 🎙️">[ one-line show description — TBD ]</span>
+          <p class="pub-link"><a href="https://wisdomworkers.substack.com/podcast" data-clown="find us on substack 💌">Follow on Substack &#8594;</a></p>
+          <span class="ph" data-clown="ep 1 loading... 🔜">Episode 01 — coming</span>
+        </div>
+        <div class="split-media">
+          <img class="cover" src="assets/simon-podcast.png" alt="Wisdom Workers podcast">
+        </div>
+      </div>
+    </div>
+  </section>
 
 </main>
 
