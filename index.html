@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Wisdom Workers</title>
+<meta name="description" content="Knowledge work is ending. Wisdom work is next.">
+<!-- Keeps the work-in-progress out of search results. Remove when publish-ready. -->
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" href="assets/sigil.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400&family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&family=Bagel+Fat+One&family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --paper:#FAFAF9; --paper-2:#EFEFED; --ink:#0C0C0B; --dark:#0B0B0A;
+    --on-dark:#F4F4F2; --muted:#6C6C68; --muted-dark:#9A9A96;
+    --line:rgba(12,12,11,.14); --line-dark:rgba(244,244,242,.16);
+    --display:"Fraunces",Georgia,serif;
+    --body:"Inter",system-ui,-apple-system,sans-serif;
+    --mono:"Space Mono",ui-monospace,Menlo,monospace;
+    --maxw:1200px;
+  }
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:var(--paper);color:var(--ink);font-family:var(--body);
+    font-size:clamp(1rem,.96rem + .2vw,1.1rem);line-height:1.6;-webkit-font-smoothing:antialiased;
+    text-rendering:optimizeLegibility;overflow-x:hidden;transition:background .5s ease,color .5s ease;}
+  body::before{content:"";position:fixed;inset:0;pointer-events:none;z-index:100;opacity:.4;transition:opacity .4s;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix type='saturate' values='0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/></svg>");
+    mix-blend-mode:multiply;}
+  main{position:relative;z-index:1;}
+  .wrap{max-width:var(--maxw);margin:0 auto;padding:0 clamp(1.3rem,5vw,4rem);position:relative;}
+  a{color:inherit;}
+  ::selection{background:var(--ink);color:var(--paper);}
+  :focus-visible{outline:2px solid currentColor;outline-offset:4px;}
+  img{max-width:100%;display:block;}
+
+  .eyebrow{font-family:var(--mono);font-size:.7rem;letter-spacing:.28em;text-transform:uppercase;
+    color:var(--muted);display:inline-flex;align-items:center;gap:.7rem;}
+  .eyebrow::before{content:"";width:22px;height:1px;background:currentColor;opacity:.6;}
+  h1,h2,h3{font-family:var(--display);font-weight:500;line-height:1.03;margin:0;}
+  .display-xl{font-size:clamp(2.9rem,4vw + 1.8rem,5.8rem);letter-spacing:-.01em;}
+  .display-l{font-size:clamp(2.1rem,2.2vw + 1.4rem,3.7rem);letter-spacing:-.005em;}
+  .display-m{font-size:clamp(1.7rem,1.4vw + 1.1rem,2.6rem);}
+  p{margin:0 0 1.1em;}
+  .lede{font-size:clamp(1.1rem,1rem + .55vw,1.35rem);line-height:1.5;}
+  .muted{color:var(--muted);}
+
+  .ph{font-family:var(--mono);font-size:.76rem;letter-spacing:.02em;color:var(--muted);
+    border:1px dashed var(--line);border-radius:5px;padding:.5rem .75rem;display:inline-block;}
+  .on-dark .ph{color:var(--muted-dark);border-color:var(--line-dark);}
+
+  header{position:sticky;top:0;z-index:50;background:color-mix(in srgb,var(--paper) 88%,transparent);
+    backdrop-filter:blur(9px);border-bottom:1px solid var(--line);transition:background .5s;}
+  .nav{display:flex;align-items:center;justify-content:space-between;gap:1rem;height:64px;}
+  .brand{display:flex;align-items:center;gap:.6rem;text-decoration:none;cursor:pointer;user-select:none;}
+  .brand img{height:20px;width:auto;}
+  .brand span{font-family:var(--mono);font-size:.72rem;letter-spacing:.26em;text-transform:uppercase;font-weight:700;}
+  .navlinks{display:flex;gap:1.6rem;align-items:center;}
+  .navlinks a{font-family:var(--mono);font-size:.72rem;letter-spacing:.13em;text-transform:uppercase;
+    text-decoration:none;color:var(--muted);transition:color .2s;}
+  .navlinks a:hover{color:var(--ink);}
+  .navlinks .cta{color:var(--paper);background:var(--ink);padding:.5rem .95rem;border-radius:100px;letter-spacing:.16em;}
+  @media(max-width:760px){.navlinks a:not(.cta){display:none;}}
+
+  .btn{font-family:var(--mono);font-size:.74rem;letter-spacing:.14em;text-transform:uppercase;
+    text-decoration:none;padding:.9rem 1.5rem;border-radius:100px;display:inline-flex;align-items:center;gap:.5rem;transition:.2s;}
+  .btn-fill{background:var(--ink);color:var(--paper);}
+  .btn-fill:hover{transform:translateY(-1px);}
+  .btn-line{border:1px solid var(--line);color:var(--ink);}
+  .btn-line:hover{border-color:var(--ink);}
+  .on-dark .btn-fill{background:var(--paper);color:var(--ink);}
+  .on-dark .btn-line{border-color:var(--line-dark);color:var(--on-dark);}
+
+  section{position:relative;}
+  .band{padding:clamp(3.4rem,8vw,7rem) 0;}
+  .band-alt{background:var(--paper-2);transition:background .5s;}
+  .on-dark{background:var(--dark);color:var(--on-dark);transition:background .5s,color .5s;}
+  .on-dark .eyebrow,.on-dark .muted{color:var(--muted-dark);}
+
+  .hero{padding:clamp(3.5rem,8vw,6.5rem) 0 clamp(3rem,6vw,5rem);overflow:hidden;}
+  .hero .sigil-wm{position:absolute;right:-4%;top:50%;transform:translateY(-50%);
+    width:min(46vw,540px);opacity:.05;pointer-events:none;z-index:0;}
+  .hero .wrap{z-index:1;}
+  .hero h1{max-width:15ch;margin:1.5rem 0;}
+  .actions{display:flex;flex-wrap:wrap;gap:.8rem;margin-top:2rem;}
+
+  .thesis-grid{display:grid;grid-template-columns:1.2fr .8fr;gap:clamp(2rem,5vw,4.5rem);align-items:end;margin-top:2.2rem;}
+  @media(max-width:860px){.thesis-grid{grid-template-columns:1fr;gap:1.4rem;}}
+  .thesis-line{max-width:20ch;}
+
+  .edge-head{margin-bottom:clamp(2rem,5vw,3.2rem);}
+  .beats{border-top:1px solid var(--line-dark);}
+  .beat{display:grid;grid-template-columns:1fr auto 1fr;gap:1.4rem;align-items:baseline;
+    padding:clamp(1.1rem,2.5vw,1.6rem) 0;border-bottom:1px solid var(--line-dark);}
+  .beat .a{font-family:var(--display);font-weight:400;font-size:clamp(1.3rem,1vw + 1rem,1.85rem);color:var(--on-dark);}
+  .beat .arrow{font-family:var(--mono);color:var(--muted-dark);align-self:center;}
+  .beat .b{font-family:var(--body);font-size:clamp(1rem,.4vw + .95rem,1.15rem);color:var(--muted-dark);text-align:right;}
+  .beat .b strong{color:var(--on-dark);font-weight:500;}
+  @media(max-width:720px){.beat{grid-template-columns:1fr;gap:.3rem;}.beat .arrow{display:none;}.beat .b{text-align:left;}}
+  .whisper{margin-top:1.8rem;}
+  .edge-how{margin-top:2.2rem;display:flex;flex-wrap:wrap;gap:.6rem;}
+  .chip{font-family:var(--mono);font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+    color:var(--muted-dark);border:1px solid var(--line-dark);border-radius:100px;padding:.45rem .85rem;}
+
+  .sec-head{margin-bottom:clamp(1.8rem,4vw,2.6rem);}
+  .sec-head h2{margin-top:.8rem;}
+
+  .grid2{display:grid;grid-template-columns:1fr 1fr;gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(max-width:700px){.grid2{grid-template-columns:1fr;}}
+  .cell{background:var(--paper);padding:clamp(1.6rem,3vw,2.4rem);min-height:190px;display:flex;flex-direction:column;gap:.9rem;transition:background .5s;}
+  .cell .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+  .cell .n{font-family:var(--display);font-weight:500;font-size:clamp(1.5rem,1vw + 1.2rem,2.1rem);}
+  .cell .tail{margin-top:auto;}
+
+  .roster{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);}
+  @media(max-width:820px){.roster{grid-template-columns:repeat(2,1fr);}}
+  @media(max-width:460px){.roster{grid-template-columns:1fr;}}
+  .seat{background:var(--paper);padding:1.4rem;min-height:150px;display:flex;flex-direction:column;justify-content:space-between;transition:background .5s;}
+  .seat img{width:26px;opacity:.45;}
+  .seat .nm{font-family:var(--display);font-weight:500;font-size:1.2rem;margin-top:.9rem;}
+  .seat .rl{font-family:var(--mono);font-size:.62rem;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);}
+  .seat.open .nm{color:var(--muted);}
+
+  .pub{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.4rem,3vw,2.4rem);}
+  @media(max-width:800px){.pub{grid-template-columns:1fr;}}
+  .pub-card{border:1px solid var(--line);background:var(--paper);overflow:hidden;display:flex;flex-direction:column;transition:background .5s;}
+  .pub-card img{aspect-ratio:1/1;object-fit:cover;width:100%;}
+  .pub-card .body,.pub-events{padding:clamp(1.4rem,3vw,2rem);display:flex;flex-direction:column;gap:.7rem;flex:1;}
+  .pub-events{border:1px solid var(--line);background:var(--paper);transition:background .5s;}
+  .pub-card .k,.pub-events .k{font-family:var(--mono);font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:var(--muted);}
+  .pub-card h3,.pub-events h3{font-size:clamp(1.5rem,1vw + 1.2rem,2rem);}
+  .pub-card .tail,.pub-events .tail{margin-top:auto;}
+
+  .conv{display:grid;grid-template-columns:.85fr 1.15fr;gap:clamp(1.8rem,4vw,3.6rem);align-items:center;margin-top:1.4rem;}
+  @media(max-width:820px){.conv{grid-template-columns:1fr;}}
+  .conv img{border:1px solid var(--line);}
+  .cred{list-style:none;margin:1.3rem 0 0;padding:0;}
+  .cred li{padding:.75rem 0;border-top:1px solid var(--line);display:flex;gap:1.1rem;align-items:baseline;}
+  .cred li:first-child{border-top:0;}
+  .cred b{font-family:var(--mono);font-size:.66rem;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);min-width:4.4rem;}
+
+  .doors{display:grid;grid-template-columns:1fr 1fr;gap:clamp(1.4rem,3vw,2.6rem);margin:2rem 0;}
+  @media(max-width:700px){.doors{grid-template-columns:1fr;}}
+  .door{border-top:1px solid var(--line-dark);padding-top:1rem;}
+  .door h3{font-size:1.3rem;margin-bottom:.5rem;}
+
+  footer{background:var(--dark);color:var(--on-dark);padding:clamp(2.4rem,5vw,3.6rem) 0;border-top:1px solid var(--line-dark);transition:background .5s;position:relative;z-index:1;}
+  footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:1.4rem;align-items:center;}
+  footer .fbrand{display:flex;align-items:center;gap:.9rem;}
+  footer .fbrand img{filter:invert(1);mix-blend-mode:screen;}
+  footer .fbrand .fsigil{width:34px;height:auto;}
+  footer .fbrand .fword{height:64px;width:auto;}
+  footer .meta{font-family:var(--mono);font-size:.7rem;letter-spacing:.08em;color:var(--muted-dark);text-align:right;line-height:1.8;}
+
+  .reveal{opacity:0;transform:translateY(14px);transition:opacity .7s ease,transform .7s ease;}
+  .reveal.in{opacity:1;transform:none;}
+
+  /* ============ CLOWN MODE ============ */
+  .clouds{display:none;position:fixed;inset:0;z-index:0;pointer-events:none;}
+  .clouds i{position:absolute;background:#fff;border-radius:100px;opacity:.9;filter:blur(1px);
+    box-shadow:34px 12px 0 -6px #fff,-34px 14px 0 -9px #fff,0 -16px 0 -8px #fff;}
+  .clouds i:nth-child(1){width:130px;height:42px;top:14%;left:-180px;animation:drift 46s linear infinite;}
+  .clouds i:nth-child(2){width:90px;height:32px;top:33%;left:-180px;animation:drift 64s linear infinite;animation-delay:-22s;}
+  .clouds i:nth-child(3){width:160px;height:50px;top:60%;left:-220px;animation:drift 54s linear infinite;animation-delay:-36s;}
+  .clouds i:nth-child(4){width:70px;height:26px;top:80%;left:-180px;animation:drift 72s linear infinite;animation-delay:-12s;}
+  @keyframes drift{to{transform:translateX(calc(100vw + 280px));}}
+  @keyframes wobble{0%,100%{transform:rotate(-4deg);}50%{transform:rotate(4deg);}}
+
+  body.clown{background:linear-gradient(180deg,#bfe8ff 0%,#d7ccff 46%,#ffd6ec 100%) fixed;color:#4a3a86;font-family:"Fredoka",system-ui,sans-serif;}
+  body.clown::before{opacity:0;}
+  body.clown .clouds{display:block;}
+  body.clown h1,body.clown h2,body.clown h3{font-family:"Bagel Fat One",system-ui,sans-serif;font-weight:400;letter-spacing:0;line-height:1.06;
+    background:linear-gradient(180deg,#ff8fc7,#8ab6ff);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    filter:drop-shadow(0 3px 0 rgba(255,255,255,.85)) drop-shadow(0 9px 12px rgba(120,90,200,.22));}
+  body.clown .eyebrow{color:#8a5cff;font-family:"Fredoka";font-weight:600;letter-spacing:.1em;}
+  body.clown .eyebrow::before{background:#8a5cff;}
+  body.clown .lede,body.clown p,body.clown li{color:#4a3a86;}
+  body.clown .muted{color:#7a6ab0;}
+  body.clown header{background:rgba(255,255,255,.6);border-bottom:2px solid rgba(255,255,255,.85);}
+  body.clown .brand span{font-family:"Fredoka";font-weight:700;color:#8a5cff;letter-spacing:.12em;}
+  body.clown .brand img,body.clown .sigil-wm,body.clown .seat img{animation:wobble 3.6s ease-in-out infinite;}
+  body.clown .navlinks a{color:#7a6ab0;font-family:"Fredoka";font-weight:600;letter-spacing:.04em;}
+  body.clown .navlinks a:hover{color:#8a5cff;}
+  body.clown .navlinks .cta{background:#ff8fc7;color:#fff;box-shadow:0 4px 0 #e46ba6;}
+  body.clown .band-alt{background:rgba(255,255,255,.4);}
+  body.clown .on-dark{background:linear-gradient(135deg,#ffc0e6,#b8dcff);color:#3f2f78;}
+  body.clown .on-dark .eyebrow{color:#8a5cff;}
+  body.clown .on-dark .muted,body.clown .on-dark .beat .b{color:#6a5aa8;}
+  body.clown .on-dark .beat .a{color:#3f2f78;}
+  body.clown .on-dark .beat .b strong{color:#e14b9b;}
+  body.clown .btn{border-radius:999px;font-family:"Fredoka";font-weight:600;letter-spacing:.03em;}
+  body.clown .btn-fill{background:#8a5cff;color:#fff;box-shadow:0 5px 0 #6b45d0;}
+  body.clown .btn-fill:hover{transform:translateY(-2px);}
+  body.clown .btn-line{border:2px solid #8a5cff;color:#8a5cff;}
+  body.clown .on-dark .btn-fill{background:#fff;color:#8a5cff;box-shadow:0 5px 0 #d9c9ff;}
+  body.clown .ph{border:none;color:#8a5cff;font-family:"Fredoka";font-weight:500;font-size:1rem;letter-spacing:0;padding:0;}
+  body.clown .beats{border-top:2px dashed rgba(138,92,255,.4);}
+  body.clown .beat{border-bottom:2px dashed rgba(138,92,255,.4);}
+  body.clown .beat .a{font-family:"Bagel Fat One";-webkit-text-fill-color:initial;color:#6b45d0;filter:none;}
+  body.clown .beat .arrow{color:#e14b9b;}
+  body.clown .chip{background:rgba(255,255,255,.65);border:2px solid rgba(255,255,255,.9);color:#7a5ad0;border-radius:999px;font-family:"Fredoka";font-weight:600;}
+  body.clown .grid2,body.clown .roster{background:transparent;border:none;gap:14px;}
+  body.clown .cell,body.clown .seat,body.clown .pub-card,body.clown .pub-events{background:rgba(255,255,255,.55);border:none;border-radius:22px;box-shadow:0 8px 0 rgba(180,150,240,.3);}
+  body.clown .cell .k,body.clown .seat .rl,body.clown .pub-card .k,body.clown .pub-events .k{color:#8a5cff;font-family:"Fredoka";font-weight:600;}
+  body.clown .cell .n,body.clown .seat .nm,body.clown .pub-card h3,body.clown .pub-events h3{font-family:"Bagel Fat One";-webkit-text-fill-color:initial;color:#6b45d0;filter:none;background:none;}
+  body.clown .conv img,body.clown .pub-card img{filter:saturate(1.15) contrast(1.02);border-radius:0;}
+  body.clown .cred li{border-top:2px dashed rgba(138,92,255,.3);}
+  body.clown .cred b{color:#8a5cff;font-family:"Fredoka";font-weight:700;}
+  body.clown .door{border-top:2px dashed rgba(138,92,255,.4);}
+  body.clown footer{background:linear-gradient(135deg,#c9b3ff,#ffb3e6);color:#3f2f78;border-top:none;}
+  body.clown footer .fbrand img{filter:none;mix-blend-mode:normal;}
+  body.clown footer .meta{color:#5a4a98;}
+
+  .unclown{display:none;position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:60;
+    font-family:"Fredoka",system-ui,sans-serif;font-weight:600;font-size:.95rem;color:#fff;background:#8a5cff;
+    border:none;border-radius:999px;padding:.7rem 1.35rem;box-shadow:0 5px 0 #6b45d0;cursor:pointer;}
+  .unclown:hover{transform:translateX(-50%) translateY(-2px);}
+  body.clown .unclown{display:inline-flex;}
+
+  @media(prefers-reduced-motion:reduce){
+    html{scroll-behavior:auto;}
+    .reveal{opacity:1;transform:none;transition:none;}
+    .clouds i,body.clown .brand img,body.clown .sigil-wm,body.clown .seat img{animation:none;}
+  }
+</style>
+</head>
+<body>
+<div class="clouds" aria-hidden="true"><i></i><i></i><i></i><i></i></div>
+<header>
+  <div class="wrap nav">
+    <a class="brand" id="brand" href="#top"><img src="assets/sigil.png" alt="Wisdom Workers"><span data-clown="Wisdom Workers ✨">Wisdom Workers</span></a>
+    <nav class="navlinks">
+      <a href="#thesis" data-clown="big idea">Thesis</a>
+      <a href="#edge" data-clown="the sauce">The edge</a>
+      <a href="#roster" data-clown="the gang">The roster</a>
+      <a href="#listen" data-clown="noises">Listen</a>
+      <a href="#invite" class="cta" data-clown="GET IN 🤡">Get in</a>
+    </nav>
+  </div>
+</header>
+
+<main id="top">
+  <!-- HERO -->
+  <section class="hero">
+    <img class="sigil-wm" src="assets/sigil.png" alt="">
+    <div class="wrap">
+      <span class="eyebrow reveal" data-clown="the vibiest place to get wise · berlin (ish) ☁️">The address for wisdom · Berlin</span>
+      <h1 class="display-xl reveal" data-clown="ur job is COOKED 💀 wanna get wise haha">Knowledge work is ending. Wisdom work is next.</h1>
+      <div class="reveal" style="margin:1.4rem 0"><span class="ph" data-clown="we're literally so wise it's crazy. come vibe, bring snacks 🫧">[ hero subline — one line, TBD ]</span></div>
+      <div class="actions reveal">
+        <a class="btn btn-fill" href="#invite" data-clown="GET IN LOSER 🤡">Get in</a>
+        <a class="btn btn-line" href="#listen" data-clown="hear us yap 🎧">Hear the podcast</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- THESIS -->
+  <section class="band band-alt" id="thesis">
+    <div class="wrap">
+      <span class="eyebrow reveal" data-clown="the big brain part 🧠">The thesis</span>
+      <div class="thesis-grid">
+        <h2 class="display-l thesis-line reveal" data-clown="everyone's so smart and so unwise it's actually diabolical 😭">The world is drowning in intelligence and starving for wisdom.</h2>
+        <div class="reveal"><span class="ph" data-clown="anyway. wisdom = good. being a lil dumb = bad. ur welcome 💅">[ 2–3 lines of thesis copy — TBD ]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- THE EDGE (dark) -->
+  <section class="band on-dark" id="edge">
+    <div class="wrap">
+      <span class="eyebrow reveal" data-clown="the secret sauce 🔥">The edge</span>
+      <div class="edge-head reveal" style="margin-top:1rem"><span class="ph" data-clown="u already have everything except The Vibes™">[ section headline — TBD ]</span></div>
+      <div class="beats reveal">
+        <div class="beat"><div class="a" data-clown="you won at capitalism 🏆">You've won every game they handed you.</div><div class="arrow">→</div><div class="b" data-clown="ok now what king 👑"><strong>Time for a bigger one.</strong></div></div>
+        <div class="beat"><div class="a" data-clown="you're kinda that guy ✨">You're already good.</div><div class="arrow">→</div><div class="b" data-clown="we make u UNTOUCHABLE fr 💪">We make you <strong>untouchable.</strong></div></div>
+        <div class="beat"><div class="a" data-clown="you bought all the stuff 🛍️">You've got everything money buys.</div><div class="arrow">→</div><div class="b" data-clown="this is the good shit money can't buy bestie 💖">This is <strong>the good shit it can't.</strong></div></div>
+        <div class="beat"><div class="a" data-clown="[ funny beat — TBD ]"><span class="ph">[ beat — TBD ]</span></div><div class="arrow">→</div><div class="b" data-clown="[ funny payoff ]"><span class="ph">[ payoff ]</span></div></div>
+      </div>
+      <div class="whisper reveal"><span class="ph" data-clown="and if ur secretly kinda not okay rn... we gotchu 🫂 (fr)">[ one implicit dogwhistle line for the person at the edge — TBD ]</span></div>
+      <div class="edge-how reveal">
+        <span class="chip" data-clown="founder therapy but hot">Founder &amp; exec coaching</span>
+        <span class="chip" data-clown="yapping on stage">High-stakes facilitation</span>
+        <span class="chip" data-clown="human alignment (we googled it)">Human-alignment advisory</span>
+        <span class="chip" data-clown="fancy vibe retreat">Curated experiences</span>
+        <span class="chip" data-clown="wisdom bootcamp 🥾">Cohorts</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROOF -->
+  <section class="band" id="proof">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-clown="receipts 🧾">Proof</span>
+        <div style="margin-top:.8rem"><span class="ph" data-clown="we did stuff. it worked. trust 🙏">[ section headline — TBD ]</span></div>
+      </div>
+      <div class="grid2 reveal">
+        <div class="cell"><div class="k" data-clown="big win ✨">Case · we</div><div class="n">Beans Entertainment</div><span class="ph" data-clown="banger case study loading 🔜">[ write-up — Simon ]</span></div>
+        <div class="cell"><div class="k" data-clown="big win ✨">Case · we</div><div class="n">CSL</div><span class="ph" data-clown="banger case study loading 🔜">[ write-up — Simon ]</span></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROSTER -->
+  <section class="band band-alt" id="roster">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-clown="the gang 🫂">The roster</span>
+        <div style="margin-top:.8rem"><span class="ph" data-clown="the wisest baddies alive (allegedly)">[ section headline — TBD ]</span></div>
+      </div>
+      <div class="roster reveal">
+        <div class="seat"><img src="assets/sigil.png" alt=""><div><div class="nm">—</div><div class="rl" data-clown="certified wise baddie">Wisdom Worker</div></div></div>
+        <div class="seat"><img src="assets/sigil.png" alt=""><div><div class="nm">—</div><div class="rl" data-clown="certified wise baddie">Wisdom Worker</div></div></div>
+        <div class="seat"><img src="assets/sigil.png" alt=""><div><div class="nm">—</div><div class="rl" data-clown="wise elder 🧙">Advisor</div></div></div>
+        <div class="seat open"><img src="assets/sigil.png" alt=""><div><div class="nm" data-clown="could be u 👀">By invitation</div><div class="rl" data-clown="one (1) spot maybe">Open seat</div></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PUBLISHING -->
+  <section class="band" id="listen">
+    <div class="wrap">
+      <div class="sec-head reveal">
+        <span class="eyebrow" data-clown="noises &amp; hangs 🎧">Listen &amp; show up</span>
+        <div style="margin-top:.8rem"><span class="ph" data-clown="we talk. sometimes deep, sometimes not 🤷">[ section headline — TBD ]</span></div>
+      </div>
+      <div class="pub reveal">
+        <article class="pub-card">
+          <img src="assets/simon-podcast.png" alt="Wisdom Workers podcast">
+          <div class="body">
+            <span class="k" data-clown="the pod 🎙️">Podcast</span>
+            <h3 data-clown="Wisdom Workers 🎉">Wisdom Workers</h3>
+            <span class="ph" data-clown="wise ppl yapping about how they got wise 🎙️">[ one-line show description — TBD ]</span>
+            <div class="tail"><span class="ph" data-clown="ep 1 loading... 🔜">Episode 01 — coming</span></div>
+          </div>
+        </article>
+        <div class="pub-events">
+          <span class="k" data-clown="the hangs 🎪">Events</span>
+          <h3 data-clown="Hangs 🫧">Gatherings</h3>
+          <span class="ph" data-clown="we hang out and get wise together 🫧">[ one-line events description — TBD ]</span>
+          <div class="tail"><span class="ph" data-clown="berlin hang w/ Futura 🎪">Futura × Wisdom Workers — Berlin</span></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONVENER -->
+  <section class="band band-alt" id="simon">
+    <div class="wrap">
+      <span class="eyebrow reveal" data-clown="the guy 🕶️ (him)">The guy</span>
+      <div class="conv">
+        <img src="assets/simon-podcast.png" alt="Simon Ohler" class="reveal">
+        <div class="reveal">
+          <div style="margin-bottom:1rem"><span class="ph" data-clown="when u need wisdom u just text simon 📱">[ headline about Simon — TBD ]</span></div>
+          <ul class="cred">
+            <li><b data-clown="coach">Coach</b> <span data-clown="coached 100+ ppl and they all lived ✨">Executive coach — 100+ clients, startups and companies.</span></li>
+            <li><b data-clown="builder">Builder</b> <span data-clown="built some twitch thing, very cool, ask him 💜">Built the Twitch ecosystem in DACH, pre- and post-acquisition.</span></li>
+            <li><b data-clown="host">Host</b> <span data-clown="recorded 60+ pods, at least 3 slapped 🎧">60+ podcast episodes recorded and shipped.</span></li>
+            <li><b data-clown="events">Events</b> <span data-clown="threw a festival, made actual money 💰🤯">Ran an annual festival to six figures.</span></li>
+            <li><b data-clown="range">Range</b> <span data-clown="6 yrs tech, 8 yrs woo-woo, fully balanced ⚖️">Six years at the edge of internet tech, eight at the edge of healing &amp; philosophy.</span></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- INVITATION (dark) -->
+  <section class="band on-dark" id="invite">
+    <div class="wrap">
+      <span class="eyebrow reveal" data-clown="GET IN 🤡">Get in</span>
+      <div class="reveal" style="margin-top:1rem"><span class="ph" data-clown="u already know if this is u bestie 💫">[ invitation headline — TBD ]</span></div>
+      <div class="doors reveal">
+        <div class="door"><h3 data-clown="ur winning 🏆">You're winning</h3><span class="ph" data-clown="and u want the good good. slide in 💌">[ one line — TBD ]</span></div>
+        <div class="door"><h3 data-clown="ur actually wise 🧘">You do the work</h3><span class="ph" data-clown="come get put on 🌟">[ one line — TBD ]</span></div>
+      </div>
+      <div class="actions reveal">
+        <a class="btn btn-fill" href="mailto:hello@wisdomworkers.xyz" data-clown="slide into our dms 💌">Start a conversation</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<footer>
+  <div class="wrap">
+    <div class="fbrand"><img class="fsigil" src="assets/sigil.png" alt=""><img class="fword" src="assets/wordmark.png" alt="Wisdom Workers"></div>
+    <div class="meta" data-clown="pods · hangs · the agency · vibes · money stuff ✨<br>© 2026 · get in 🤡">
+      Podcast · Events · Agency · Spaces · Ventures<br>
+      © 2026 · <a href="mailto:hello@wisdomworkers.xyz">get in</a>
+    </div>
+  </div>
+</footer>
+
+<button id="unclown" class="unclown" aria-label="Back to the serious site">ok i'm serious now 😔</button>
+
+<script>
+  (function(){
+    var els=document.querySelectorAll('.reveal');
+    if('IntersectionObserver' in window){
+      var io=new IntersectionObserver(function(en){en.forEach(function(e){if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target);}});},{threshold:.12,rootMargin:'0px 0px -8% 0px'});
+      document.querySelectorAll('.hero .reveal').forEach(function(e,i){e.style.transitionDelay=(i*.1)+'s';});
+      els.forEach(function(e){io.observe(e);});
+    } else { els.forEach(function(e){e.classList.add('in');}); }
+
+    // ---- clown easter egg: triple-click the logo ----
+    var body=document.body, brand=document.getElementById('brand'), back=document.getElementById('unclown');
+    var clicks=0, timer=null;
+    function setClown(on){
+      body.classList.toggle('clown', on);
+      document.querySelectorAll('[data-clown]').forEach(function(el){
+        if(on){ if(el.getAttribute('data-serious')===null){ el.setAttribute('data-serious', el.innerHTML); } el.innerHTML=el.getAttribute('data-clown'); }
+        else if(el.getAttribute('data-serious')!==null){ el.innerHTML=el.getAttribute('data-serious'); }
+      });
+    }
+    brand.addEventListener('click', function(e){
+      e.preventDefault();
+      clicks++; clearTimeout(timer);
+      timer=setTimeout(function(){clicks=0;}, 700);
+      if(clicks>=3){ clicks=0; setClown(!body.classList.contains('clown')); }
+    });
+    back.addEventListener('click', function(){ setClown(false); window.scrollTo({top:0,behavior:'smooth'}); });
+  })();
+</script>
+</body>
+</html>
